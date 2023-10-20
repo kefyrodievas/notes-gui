@@ -1,6 +1,6 @@
 #include "main.h"
-#include "window.h"
 #include "imgui/imgui.h"
+#include "window.h"
 #include <SDL2/SDL_video.h>
 
 int main(void) {
@@ -49,8 +49,8 @@ int main(void) {
       (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
                         SDL_WINDOW_ALLOW_HIGHDPI);
   SDL_Window *window =
-      SDL_CreateWindow("imgui thing", SDL_WINDOWPOS_CENTERED,
-                       SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
+      SDL_CreateWindow("Notes", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                       1280, 720, window_flags);
   SDL_GLContext gl_context = SDL_GL_CreateContext(window);
   SDL_GL_MakeCurrent(window, gl_context);
   SDL_GL_SetSwapInterval(1); // Enable vsync
@@ -69,7 +69,7 @@ int main(void) {
   ImGui_ImplOpenGL3_Init(glsl_version);
 
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-  struct window MyWindow;
+  // struct window MyWindow;
   bool done = false;
   while (!done) {
     // event handling(idk how tf this works tbh)
@@ -86,11 +86,11 @@ int main(void) {
     // start imgui frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
-    
+
     ImGui::NewFrame();
     main_window.draw_main_window(window);
+    // ImGui::ShowDemoWindow();
     ImGui::Render();
-    // draw_imgui_window(window, MyWindow);
     glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
     glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
                  clear_color.z * clear_color.w, clear_color.w);
